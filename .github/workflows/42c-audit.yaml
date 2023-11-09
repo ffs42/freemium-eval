@@ -23,6 +23,7 @@ jobs:
           upload-to-code-scanning: true
           enforce-sqg: false
           sarif-report: 42Crunch_AuditReport_${{ github.run_id }}.SARIF
+          log-level: debug
 
       - name: Upload SARIF file to Artifacts
         uses: actions/upload-artifact@v2
