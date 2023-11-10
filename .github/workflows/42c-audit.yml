@@ -2,9 +2,11 @@ name: "42Crunch API Security Audit"
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "main" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ main ]
+    branches: [ "main" ]  
 
 jobs:
   run_42c_audit:
@@ -16,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Audit API definition for security issues
-        uses: 42Crunch/api-security-audit-action-freemium@0.0.3
+        uses: 42Crunch/api-security-audit-action-freemium@0.0.4
         with:
           # Upload results to Github Code Scanning
           # Set to false if you don't have Github Advanced Security.
