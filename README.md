@@ -92,7 +92,7 @@ on:
     branches: [ "main" ]  
 
 env:
-    TARGET_URL="https://your_ngrok_domain.ngrok.app/api"
+    TARGET_URL: "https://your_ngrok_domain.ngrok.app/api"
 jobs:
   run_42c_scan:
     permissions:
