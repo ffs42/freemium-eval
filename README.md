@@ -55,10 +55,6 @@ Note the URL that ngrok provides. This will be used in the next step.
 
 In this tutorial, we provide you with an existing workflow that you can use to test the API. You need to adjust it so that it works in your environment.
 
-### Obtain a credential 
-
-T
-
 ### Create a GitHub secret 
 
 In order to run the scan, you will need to provide an API credential. The Photo Manager API lets users register and obtain automatically a JWT token. We have provided a sample script that will obtain a token from the API.
@@ -66,7 +62,7 @@ In order to run the scan, you will need to provide an API credential. The Photo 
 1. Execute the scripts/register_user.sh script
 
 ```bash
-sh register_user.sh
+sh get_token.sh
 ```
 
 2. Copy the token that is returned by the script
