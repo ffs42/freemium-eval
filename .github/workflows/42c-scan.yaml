@@ -19,28 +19,30 @@ jobs:
     permissions:
      contents: read # for actions/checkout to fetch code
      security-events: write # for results upload to Github Code Scanning
-    services:
-        db:
-            image: 42crunch/pixi:mongo
-            options: >-
-              --quiet
-              --health-cmd mongo
-              --health-interval 10s
-              --health-timeout 5s
-              --health-retries 5
-            ports:
-            - "27017:27017"
-        app:
-            image: 42crunch/pixi:v4.7
-            env:
-              # The hostname used to communicate with the MongoDB database
-              MONGO_URL: mongodb://db:27017
-            ports:
-            - "8090:8090"
+    # services:
+    #     db:
+    #         image: 42crunch/pixi:mongo
+    #         options: >-
+    #           --quiet
+    #           --health-cmd mongo
+    #           --health-interval 10s
+    #           --health-timeout 5s
+    #           --health-retries 5
+    #         ports:
+    #         - "27017:27017"
+    #     app:
+    #         image: 42crunch/pixi:v4.7
+    #         env:
+    #           # The hostname used to communicate with the MongoDB database
+    #           MONGO_URL: mongodb://db:27017
+    #         ports:
+    #         - "8090:8090"
     
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Start API
+        run: docker compose up 
       - name: Set up Python 3.11
         uses: actions/setup-python@v2
         with:
@@ -69,3 +71,5 @@ jobs:
             name: 42Crunch_ScanReport_${{ github.run_id }}
             path: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
             if-no-files-found: error
+      - name: Stop API
+        run: docker compose down      

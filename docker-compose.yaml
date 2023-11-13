@@ -11,6 +11,8 @@ services:
   app:
      image: 42crunch/pixi:v4.7
      container_name: pixiapi
+     depends_on:
+     - db
      ports:
        - "8090:8090"
      expose:
