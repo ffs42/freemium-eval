@@ -15,43 +15,28 @@ env:
 
 jobs:
   run_42c_scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions:
      contents: read # for actions/checkout to fetch code
      security-events: write # for results upload to Github Code Scanning
-    # services:
-    #     db:
-    #         image: 42crunch/pixi:mongo
-    #         options: >-
-    #           --quiet
-    #           --health-cmd mongo
-    #           --health-interval 10s
-    #           --health-timeout 5s
-    #           --health-retries 5
-    #         ports:
-    #         - "27017:27017"
-    #     app:
-    #         image: 42crunch/pixi:v4.7
-    #         env:
-    #           # The hostname used to communicate with the MongoDB database
-    #           MONGO_URL: mongodb://db:27017
-    #         ports:
-    #         - "8090:8090"
-    
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Start API
         run: docker compose up -d
       - name: Set up Python 3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: 3.11
       - name: Install Python prerequisites
         run: pip install requests
+      - name: Pause
+        run: sleep 5
+      - name: connect to API 
+        run: curl -v http://localhost:8090/api/user/login
       - name: get_photoapi_token
         id: get_photoapi_token
-        run: | 
+        run: |
           login_response=$(python .42c/scripts/pixi-login.py -u ${{ env.USER_NAME }} -p ${{ env.USER_PASS }})
           echo "PHOTO_API_TOKEN=$login_response" >> $GITHUB_OUTPUT
       # Shown for debugging purposes.    

@@ -18,7 +18,7 @@ def obtain_token (name: str, password: str):
     response = requests.post(url, data=json.dumps(payload), headers=headers) 
 
     if response.status_code != 200:
-        print (response.json())
+        print (response.content.decode())
         sys.exit(1)
     else:
         user_token = response.json().get('token')
