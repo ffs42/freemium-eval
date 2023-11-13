@@ -11,7 +11,6 @@ def obtain_token (name: str, password: str):
     url =  f"{TARGET_URL}/user/login"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     
-    print (f"Target URL: {url}")
     #Initialize  token value
     user_token = None
 
@@ -19,6 +18,7 @@ def obtain_token (name: str, password: str):
     response = requests.post(url, data=json.dumps(payload), headers=headers) 
 
     if response.status_code != 200:
+        print (response.json())
         sys.exit(1)
     else:
         user_token = response.json().get('token')
