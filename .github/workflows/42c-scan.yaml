@@ -35,9 +35,6 @@ jobs:
         run: |
           login_response=$(python .42c/scripts/pixi-login.py -u ${{ env.USER_NAME }} -p ${{ env.USER_PASS }})
           echo "PHOTO_API_TOKEN=$login_response" >> $GITHUB_OUTPUT
-      # Shown for debugging purposes.    
-      - name: Working API token
-        run: echo ${{ steps.get_photoapi_token.outputs.PHOTO_API_TOKEN }}
       - name: Scan API for vulnerabilities
         uses: 42Crunch/api-security-scan-action-freemium@main
         with:
@@ -48,13 +45,11 @@ jobs:
             target-url: ${{ env.TARGET_URL }}
             upload-to-code-scanning: false
             log-level: info
-            sarif-report: 42Crunch_AuditReport_${{ github.run_id }}.SARIF
+            sarif-report: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
       - name: save-scan-report
         if: always()        
         uses: actions/upload-artifact@v3
         with:
             name: 42Crunch_ScanReport_${{ github.run_id }}
             path: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
-            if-no-files-found: error
-      - name: Stop API
-        run: docker compose down      
+            if-no-files-found: error  
