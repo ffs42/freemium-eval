@@ -35,13 +35,10 @@ def obtain_token (name: str, password: str):
                 break
         
         except Exception as e:
-            print (e)
             retry_count += 1
             if retry_count < max_retries:
-                print(f"Retrying in {retry_delay} seconds...")
                 time.sleep(retry_delay)
-            else:
-                print("Max retry attempts reached. Exiting...")   
+            else:  
                 sys.exit (1) 
 
     return user_token
