@@ -20,7 +20,7 @@ The API you will use is derived from an [original OWASP](https://github.com/DevS
 
 The repository contains a docker compose file you can use, should you want to run and test the API locally. The Postman collection to drive the API is available [here](https://www.postman.com/get-42crunch/workspace/42crunch-api/collection/13761657-2fe8d964-9687-4a95-9e16-2c06e7d5fe7e).
 
-![](/Volumes/MYDATA/CustomerWork/freemium-eval/graphics/photo_manager_postman.png)
+![](./graphics/photo_manager_postman.png)
 
 ## Prerequisites
 
