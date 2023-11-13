@@ -30,10 +30,6 @@ jobs:
           python-version: 3.11
       - name: Install Python prerequisites
         run: pip install requests
-      - name: Pause
-        run: sleep 5
-      - name: connect to API 
-        run: curl -v http://localhost:8090/api/user/login
       - name: get_photoapi_token
         id: get_photoapi_token
         run: |

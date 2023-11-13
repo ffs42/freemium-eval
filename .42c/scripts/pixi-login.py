@@ -3,26 +3,48 @@
 import json
 import argparse
 import requests
+import time
 import sys
+
 
 
 # This call updates a named scan configuration
 def obtain_token (name: str, password: str):
+    # Define the maximum number of retry attempts
+    max_retries = 5
+    # Define the delay between retry attempts (in seconds)
+    retry_delay = 2
+    # Initialize a variable to keep track of the number of retries
+    retry_count = 0
+
     url =  f"{TARGET_URL}/user/login"
     headers = {"accept": "application/json", "Content-Type": "application/json"}
     
     #Initialize  token value
     user_token = None
-
+    
     payload = {f"user": name, "pass": password}
-    response = requests.post(url, data=json.dumps(payload), headers=headers) 
 
-    if response.status_code != 200:
-        print (response.content.decode())
-        sys.exit(1)
-    else:
-        user_token = response.json().get('token')
-        return user_token
+    while retry_count < max_retries:
+        try:
+            response = requests.post(url, data=json.dumps(payload), headers=headers) 
+            if response.status_code != 200:
+                raise Exception(f"Received status code {response.status_code}. Retrying...")
+            else:
+                user_token = response.json().get('token')
+                break
+        
+        except Exception as e:
+            print (e)
+            retry_count += 1
+            if retry_count < max_retries:
+                print(f"Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+            else:
+                print("Max retry attempts reached. Exiting...")   
+                sys.exit (1) 
+
+    return user_token
 
 
 def main():
@@ -55,7 +77,7 @@ def main():
     debug = parsed_cli.debug
     user = parsed_cli.user_name
     password = parsed_cli.user_pass
-    TARGET_URL = parsed_cli.target
+    TARGET_URL = parsed_cli.target    
 
     user_token = obtain_token (user, password)
     # Uncomment this for integration with Azure DevOps
