@@ -27,6 +27,9 @@ jobs:
             - "27017:27017"
         app:
             image: 42crunch/pixi:v4.7
+            env:
+              # The hostname used to communicate with the MongoDB database
+              MONGO_URL: mongodb://localhost:27017
             ports:
             - "8090:8090"
     
