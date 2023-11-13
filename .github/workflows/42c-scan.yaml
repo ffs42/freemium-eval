@@ -22,7 +22,7 @@ jobs:
     services:
         db:
             image: 42crunch/pixi:mongo
-            options: mongod --quiet
+            options: --quiet
             ports:
             - "27017:27017"
         app:
