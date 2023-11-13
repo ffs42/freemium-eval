@@ -42,7 +42,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
       - name: Start API
-        run: docker compose up 
+        run: docker compose up -d
       - name: Set up Python 3.11
         uses: actions/setup-python@v2
         with:
