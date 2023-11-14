@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://yourdomain.ngrok.app/api"
+      "url": "http://localhost:8090/api"
     }
   ],
 
