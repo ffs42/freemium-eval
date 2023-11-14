@@ -6,8 +6,6 @@ import requests
 import time
 import sys
 
-
-
 # This call updates a named scan configuration
 def obtain_token (name: str, password: str):
     # Define the maximum number of retry attempts
@@ -81,7 +79,7 @@ def main():
     #subprocess.Popen(["echo", "##vso[task.setvariable variable=PIXI_TOKEN;isoutput=true]{0}".format(scan_token)])
     # Uncomment this for integration with GitHub actions
     # Send to stdout
-    print (user_token)
+    print (user_token[:10])
 
 # -------------- Main Section ----------------------
 if __name__ == '__main__':
