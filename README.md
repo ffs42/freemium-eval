@@ -30,7 +30,7 @@ The repository contains a docker compose file you can use, should you want to ru
 
 ## Running the tutorial
 
-In order to run this tutorial, you will need to fork this repository and run the .
+In order to run this tutorial, you will need to fork this repository and run the `42Crunch API Security Scan` workflow.
 
 ### Fork this repository
 
@@ -38,13 +38,15 @@ In order to follow this tutorial, you will need to fork this repository. To do t
 
 ### Enable workflows
 
-Once you fork this repository, workflows will be disabled for security reasons. You need to approve the workflow https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks 
+Once you fork this repository, workflows will be disabled for security reasons. You need to approve the workflow in order to run it. 
+
+Check  https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks for further details.
 
 ![](./graphics/freemium_eval_enableWorkflows.png)
 
 ### Run the workflow
 
-The workflow will run automatically when you commit changes to the repository. You can also run it manually by clicking on the "Run workflow" button.
+The workflow will run automatically when you commit changes to the repository, on branches and PRs. You can also run it manually by clicking on the "Run workflow" button.
 
 ![](./graphics/run_workflow.png)
 
