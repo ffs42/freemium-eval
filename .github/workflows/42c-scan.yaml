@@ -46,12 +46,20 @@ jobs:
             api-credential: ${{ steps.get_photoapi_token.outputs.PHOTO_API_TOKEN }}
             target-url: ${{ env.TARGET_URL }}
             upload-to-code-scanning: true
+            scan-report: 42Crunch_RawReport_${{ github.run_id }}.json
             log-level: debug
             sarif-report: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
-      - name: save-scan-report
+      - name: save-sarif-report
         if: always()        
         uses: actions/upload-artifact@v3
         with:
             name: 42Crunch_ScanReport_${{ github.run_id }}
             path: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
-            if-no-files-found: error  
+            if-no-files-found: error
+      - name: save-scan-report
+        if: always()        
+        uses: actions/upload-artifact@v3
+        with:
+            name: 42Crunch_RawReport_${{ github.run_id }}
+            path: 42Crunch_RawReport_${{ github.run_id }}.json
+            if-no-files-found: error      
