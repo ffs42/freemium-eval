@@ -12,7 +12,7 @@ Results are made available in the SARIF format and uploaded Github Code Scanning
 
 42Crunch Scan also validates API responses to ensure that the API implementation conforms to its definition and does not leak additional data or stack traces for example.
 
-The scan classifies vulnerabilities found issues according to the OWASP API Security Top 10. You can learn more about scan by watching [this short 5 mins video]().
+The scan classifies vulnerabilities found issues according to the OWASP API Security Top 10. You can learn more about scan by watching [this short 5 mins video](https://42crunch.com/free-user-faq/).
 
 ## PhotoManager API
 
@@ -26,19 +26,15 @@ The repository contains a docker compose file you can use, should you want to ru
 
 **GitHub Code Scanning**: this task assumes that GitHub Advanced Security is enabled on your repository. Code Scanning can be enabled for free on public repositories and for paid accounts on private repositories. You can enable Code Scanning by following the instructions [here](https://docs.github.com/en/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning#enabling-code-scanning-for-a-repository).
 
-*Note*: this tutorial leverages the Freemium version of 42Crunch Scan. It is available for GitHubActions  and will be added on more CI/CD platforms in the future.
+*Note*: this tutorial leverages the [Freemium version](https://github.com/marketplace/actions/42crunch-rest-api-dynamic-security-testing-freemium) of 42Crunch Scan. It is now available for GitHubActions  and will be added on more CI/CD platforms in the future.
 
 ## Running the tutorial
+
+In order to run this tutorial, you will need to fork this repository and run the .
 
 ### Fork this repository
 
 In order to follow this tutorial, you will need to fork this repository. To do this, click on the "Fork" button in the top right corner of this page.
-
-### Run the workflow
-
-The workflow will run automatically when you commit changes to the repository. You can also run it manually by clicking on the "Run workflow" button.
-
-However, workflows forked from public repositories are disabled for security reasons. You need to approve the workflow once it starts (see https://docs.github.com/en/actions/managing-workflow-runs/approving-workflow-runs-from-public-forks.) 
 
 ### Enable workflows
 
@@ -46,11 +42,25 @@ Once you fork this repository, workflows will be disabled for security reasons. 
 
 ![](./graphics/freemium_eval_enableWorkflows.png)
 
-## View the results
+### Run the workflow
+
+The workflow will run automatically when you commit changes to the repository. You can also run it manually by clicking on the "Run workflow" button.
+
+![](./graphics/run_workflow.png)
+
+## Viewing the results in Code Scanning
 
 Once the workflow has completed, you can view the scan results inside the Security tab of your repository, under Code Scanning Alerts. The full SARIF report is also exported as an artifact.
 
-<image will go here>
+![](./graphics/code_scanning_results.png)
+
+## Viewing SARIF files in Visual Studio Code
+
+Microsoft provides a [SARIF viewer extension](https://marketplace.visualstudio.com/items?itemName=MS-SarifVSCode.sarif-viewer) you can install into Visual Studio Code. Used in conjunction with [42Crunch extension](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi), it helps you view issues found by 42Crunch Audit within the OpenAPI file.
+
+The SARIF extension, once connected to GitHub, can directly display the issues from GitHub Code Scanning.
+
+![](./graphics/SARIFinVSCode.png)
 
 ## Conclusion
 
