@@ -9,7 +9,7 @@ on:
     branches: [ "main" ]  
 
 env:
-    TARGET_URL: "http://host.docker.internal:8090/api"
+    TARGET_URL: "http://localhost:8090/api"
     # For illustration purposes only - This is fake data. 
     # Use Secrets when dealing with sensitive data.
     USER_NAME: "misty94@demo.mail"
@@ -21,6 +21,24 @@ jobs:
     permissions:
      contents: read # for actions/checkout to fetch code
      security-events: write # for results upload to Github Code Scanning
+    
+    services:
+      pixidb:
+        image: 42crunch/pixi:mongo
+        options: >-
+          --quiet
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 27017:27017
+      app:
+        image: 42crunch/pixi:v4.7
+        options: --link pixidb
+        ports:
+          - 8090:8090
+    
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -45,7 +63,7 @@ jobs:
             # Set to false if you don't have Github Advanced Security.
             api-definition: api-specifications/PhotoManager.json
             api-credential: ${{ steps.get_photoapi_token.outputs.PHOTO_API_TOKEN }}
-            target-url: ${{ env.TARGET_URL }}
+            target-url: "http://app:8090/api"
             upload-to-code-scanning: true
             scan-report: 42Crunch_RawReport_${{ github.run_id }}.json
             log-level: debug
