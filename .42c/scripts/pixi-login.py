@@ -79,7 +79,7 @@ def main():
     #subprocess.Popen(["echo", "##vso[task.setvariable variable=PIXI_TOKEN;isoutput=true]{0}".format(scan_token)])
     # Uncomment this for integration with GitHub actions
     # Send to stdout
-    print (user_token[:10])
+    print (user_token)
 
 # -------------- Main Section ----------------------
 if __name__ == '__main__':
