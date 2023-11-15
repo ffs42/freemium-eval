@@ -9,7 +9,7 @@ on:
     branches: [ "main" ]  
 
 env:
-    TARGET_URL: "http://127.0.0.1:8090/api"
+    TARGET_URL: "http://host.docker.internal:8090/api"
     # For illustration purposes only - This is fake data. 
     # Use Secrets when dealing with sensitive data.
     USER_NAME: "misty94@demo.mail"
