@@ -61,7 +61,7 @@ jobs:
             target-url: "http://app:8090/api"
             upload-to-code-scanning: true
             scan-report: 42Crunch_RawReport_${{ github.run_id }}.json
-            log-level: debug
+            log-level: info
             sarif-report: 42Crunch_ScanReport_${{ github.run_id }}.SARIF
       - name: save-sarif-report
         if: always()        
